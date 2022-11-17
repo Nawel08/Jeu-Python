@@ -105,4 +105,4 @@ while answer=="oui":
         print("Votre score est de: ",p["score"]) #on place ici l'initialisation du score pour que ça s'affiche à la fin de l'exécution sous la map
         answer=input("Voulez-vous continuez à jouer?")#demander au joueur si il veut continuer ou non pour savoir si arrêter le jeux ou non:#tant que answer=="oui" donc que le joueur veut continuer à jouer,on continue le jeux
         
-print("Fin du jeux")
+print("Fin du jeux") +print("BRAVO!!!")
