@@ -41,7 +41,29 @@ def update_objects(p,t):
     if (p["x"],p["y"]) in t: # si la position du joueur correspond à une position de bougie
         p["score"]+=1 #on incrémente de 1 le score de l'utilisateur quand il est sur  une bougie 
         t.remove((p["x"],p["y"])) #on enlève la position de la bougie (qui est égale à la position du joueur)
-    return t 
+    return t
+
+
+def generate_ranom_map(size_map,proportion_empty, proportion_lader):
+    M1=[] #novuelle matrice de la carte
+    for i in range(size_map[0]):
+        for j in range(size_map[1]):
+            M1[i][j].append(0)
+    #on a rempli notre nouvelle matrice de 0 en fonction de sa taille
+    for k in range(proportion_empty): #pour ajouter les trous
+        a=random.randint(0, len(M)-1)#création d'un numéro de ligne de plateau aléatoire pour l'objet
+        b=random.randint(0,len(M)-1)#création d'un numéro de colonne de plateau aléatoire pour l'objet
+        if M[a][b]==0:
+            M[a][b].append(1)
+    for k in range(proportion_lader): #pour ajouter les échelles
+        c=random.randint(0, len(M)-1)#création d'un numéro de ligne de plateau aléatoire pour l'objet
+        d=random.randint(0,len(M)-1)#création d'un numéro de colonne de plateau aléatoire pour l'objet
+        if M[c][d]==0:
+            M[c][d].append("#")  
+    
+    return M1
+
+
 def display_map_char_and_objects(M,d,p,t):#création d'une fonction qui modifie le plateau en y insérant le personnage et les nouveaux objets
     d={0:'_',1:'#',2:" "}#dictionnaire utiliser pour convertir les éléments de la matrice en caractère pour donner une forme au plateau: les 0 sont des "_" et les 1 des "#"
     for i in range (len(M)):#parcours la matrice 
@@ -57,9 +79,7 @@ t=create_objects(nb_objects,M)#attribue à T le dictionnaire des objets crée po
 p=create_perso(depart)#attribu à p le dictionnaire du personnage de départ pour l'utiliser dans les prochaines fonctions
 letter=""#création case letter
 def update_p(letter,p,M):
-    letter= input("Où souhaitez-vous aller ?")#demander au joueur où il veut se déplacer (avec le système de lettre)
-    if letter!="z" and letter!="q" and letter!="s" and letter!="d":#si il met une lettre différente des commande renvoie que ce n'est pas possible
-        print ("La lettre entrée n'est pas reconnue, veuillez recommencer.")
+            
     if letter=="z":
         if p["x"]>0:#vérifier que la position ne dépasse pas le cadre du plateau
            p["x"]-=1#enlève 1 à la position de la ligne pour monter
@@ -93,16 +113,20 @@ def update_p(letter,p,M):
              return print("Cette action n'est pas possible.")#on retourne que l'action n'est pas possible si la case n'est pas vide (=qu'il y a une échelle)
       else:
           print("ce n'est pas possible")
-answer="oui"#on initialise answer="oui" pour la première éxécution, après answer est donner par le joueur.
-while answer=="oui":
+
+c=0#on initialise answer="oui" pour la première éxécution, après answer est donner par le joueur.
+while c==0:
     if len(t)==0: #Si le disctionnaire qui contient l'emplacement des bougies est vide, ça signifie qu'il n'y a plus de bougie a ramasser donc on stoppe le jeu
         print("La partie est terminée. SCORE: ",p["score"]) #on affiche la fin de la partie et le score
         break #on sort de la boucle
     else:
+        letter= input("Où souhaitez-vous aller ?")#demander au joueur où il veut se déplacer (avec le système de lettre)
+        if letter!="z" and letter!="q" and letter!="s" and letter!="d":#si il met une lettre différente des commande renvoie que ce n'est pas possible
+            print("La lettre entrée n'est pas reconnue, la partie est terminée.")
+        break
         update_p(letter,p,M)
         update_objects(p,t)
         display_map_char_and_objects(M,d,p,t)
         print("Votre score est de: ",p["score"]) #on place ici l'initialisation du score pour que ça s'affiche à la fin de l'exécution sous la map
-        answer=input("Voulez-vous continuez à jouer?")#demander au joueur si il veut continuer ou non pour savoir si arrêter le jeux ou non:#tant que answer=="oui" donc que le joueur veut continuer à jouer,on continue le jeux
+        #answer=input("Voulez-vous continuez à jouer?")#demander au joueur si il veut continuer ou non pour savoir si arrêter le jeux ou non:#tant que answer=="oui" donc que le joueur veut continuer à jouer,on continue le jeux
         
-print("Fin du jeux") +print("BRAVO!!!")
