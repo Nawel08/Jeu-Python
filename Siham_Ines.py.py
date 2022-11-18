@@ -40,6 +40,24 @@ def update_objects(p,t):
         p["score"]+=1 #on incrémente de 1 le score de l'utilisateur quand il est sur  une bougie 
         t.remove((p["x"],p["y"])) #on enlève la position de la bougie (qui est égale à la position du joueur)
     return t 
+def generate_ranom_map(size_map,proportion_empty, proportion_lader):
+    M1=[] #novuelle matrice de la carte
+    for i in range(size_map[0]):
+        for j in range(size_map[1]):
+            M1[i][j].append(0)
+    #on a rempli notre nouvelle matrice de 0 en fonction de sa taille
+    for k in range(proportion_empty): #pour ajouter les trous
+        a=random.randint(0, len(M)-1)#création d'un numéro de ligne de plateau aléatoire pour l'objet
+        b=random.randint(0,len(M)-1)#création d'un numéro de colonne de plateau aléatoire pour l'objet
+        if M[a][b]==0:
+            M[a][b].append(1)
+    for k in range(proportion_lader): #pour ajouter les échelles
+        c=random.randint(0, len(M)-1)#création d'un numéro de ligne de plateau aléatoire pour l'objet
+        d=random.randint(0,len(M)-1)#création d'un numéro de colonne de plateau aléatoire pour l'objet
+        if M[c][d]==0:
+            M[c][d].append("#")  
+    
+    return M1
 def display_map_char_and_objects(M,d,p,t):#création d'une fonction qui modifie le plateau en y insérant le personnage et les nouveaux objets
     d={0:'_',1:'#',2:" "}#dictionnaire utiliser pour convertir les éléments de la matrice en caractère pour donner une forme au plateau: les 0 sont des "_" et les 1 des "#"
     for i in range (len(M)):#parcours la matrice 
