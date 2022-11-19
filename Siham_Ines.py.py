@@ -88,7 +88,7 @@ def update_p(letter,p,M):
       else:
           print("ce n'est pas possible")
     if letter=="s":
-      if p["x"]<len(M):
+      if p["x"]<(len(M)-1): 
           p["x"]+=1
           if M[p["x"]][p["y"]]!=1:
               p["x"]-=1
