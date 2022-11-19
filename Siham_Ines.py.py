@@ -53,10 +53,10 @@ def display_map_char_and_objects(m,d,p,t):
 def update_p(letter,p,m):
     if letter=="z":
         if p["x"]>0:
-           p["x"]-=1
-           if m[p["x"]][p["y"]]!=1:
-               p["x"]+=1
-               return print("ce n'est pas possible") 
+           if m[p["x"]][p["y"]]==1:
+               p["x"]-=1
+           else:
+              return print("ce n'est pas possible") 
         else:
             print("ce n'est pas possible") 
     if letter=="q":
