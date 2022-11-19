@@ -40,8 +40,8 @@ def update_objects(p,t):
     return t 
 
 def display_map_char_and_objects(m,d,p,t):
-    for i in range (len(m)): #Tu appelles ici "M" alors qu'il ne fait pas partie des arguments
-        for j in range(len(m[i])):
+    for i, ch in enumerate(m): #Tu appelles ici "M" alors qu'il ne fait pas partie des arguments
+        for j, cha in enumerate(ch):
            if (i,j)==(p["x"],p["y"]):
                 print(p["repr"],end="")
            elif (i,j) in t:
