@@ -42,11 +42,11 @@ def update_objects(p,t):
 def display_map_char_and_objects(m,d,p,t):
     for i in range (len(m)): #Tu appelles ici "M" alors qu'il ne fait pas partie des arguments
         for j in range(len(m[i])):
-            if (i,j)==(p["x"],p["y"]):
+           if (i,j)==(p["x"],p["y"]):
                 print(p["repr"],end="")
-            if (i,j) in t:
+           elif (i,j) in t:
                   print('i',end="")
-            elif m[i][j] in d and (i,j)!=(p["x"],p["y"]):
+           elif m[i][j] in d :
                   print(d[m[i][j]],end="")
 
         print()
