@@ -13,7 +13,7 @@ def display_m(m,d):
         print()
 
 def create_perso(depart):
-    return {"repr" :'o',"x":depart[0],"y":depart[1],"score":0} 
+    return {"repr" :'\U0001f478',"x":depart[0],"y":depart[1],"score":0} 
 
 def display_map_and_char(m,d,p):   
     for i in range (len(m)): #Tu appelles ici "M" alors qu'il ne fait pas partie des arguments
@@ -45,7 +45,7 @@ def display_map_char_and_objects(m,d,p,t):
            if (i,j)==(p["x"],p["y"]):
                 print(p["repr"],end="")
            elif (i,j) in t:
-                  print('i',end="")
+                  print('\U0001f56f',end="")
            elif m[i][j] in d :
                   print(d[m[i][j]],end="")
 
@@ -84,11 +84,11 @@ def update_p(letter,p,m):
              return print("ce n'est pas possible")
       else:
             print("ce n'est pas possible")
-M = [[0, 0, 0, 1, 2, 0, 0],[0, 1, 0, 0, 0, 0, 0],[0, 1, 0, 0, 1, 0, 0],[0, 0, 1, 0, 0, 2, 0]]
+M = [[0, 0, 0, 1, 0, 0, 2],[0, 1, 0, 0, 0, 0, 0],[0, 1, 0, 0, 1, 0, 0],[0, 0, 1, 0, 0, 0, 2]]
 # Ne donne pas le même nom à tes variables que tu initialises et aux arguments de la fonction
 D={0:'_',1:'#',2:" "}
 dep=(0,0)
-nb=6
+nb=4
 T=create_objects(nb,M)
 P=create_perso(dep)
 letter=""
@@ -105,4 +105,37 @@ while answer:
         update_p(letter,P,M)
         update_objects(P,T)
         print("Votre score est de: ",P["score"]) 
-        
+Z=create_objects(6, M)
+U=create_perso((0,0))
+print("Bienvenue dans le niveau 2")
+i=0
+while answer:
+    display_map_char_and_objects(M,D,U,Z)
+    if len(Z)==0: 
+        print("La partie est terminée. SCORE: ",U["score"]) 
+        break 
+    else:
+        letter= input("Où souhaitez-vous aller ?")
+        if letter!="z" and letter!="q" and letter!="s" and letter!="d":
+            break
+        update_p(letter,U,M)
+        update_objects(U,Z)
+        print("Votre score est de: ",U["score"]) 
+        i+=1
+Q=create_objects(8, M)
+R=create_perso((0,0))
+print("Bienvenue dans le niveau 2")
+i=0
+while answer:
+    display_map_char_and_objects(M,D,R,Q)
+    if len(Q)==0: 
+        print("La partie est terminée. SCORE: ",R["score"]) 
+        break 
+    else:
+        letter= input("Où souhaitez-vous aller ?")
+        if letter!="z" and letter!="q" and letter!="s" and letter!="d":
+            break
+        update_p(letter,R,M)
+        update_objects(R,Q)
+        print("Votre score est de: ",R["score"]) 
+        i+=1
