@@ -1,4 +1,16 @@
 import random
+import datetime
+import Fenetre as Fenetre
+
+"""
+start_time = datetime.datetime.now()
+# ici le code à évaluer
+end_time = datetime.datetime.now()
+time_diff = (end_time - start_time)
+execution_time = time_diff.total_seconds() * 1000
+
+print(execution_time)
+"""
 def display_m(m,d):
     for i in m:
         for j in i:
@@ -8,7 +20,7 @@ def display_m(m,d):
 
 def create_perso(depart):
     
-    return {"repr" :'\U0001f478',"x":depart[0],"y":depart[1],"score":0} 
+    return {"repr" :'o',"x":depart[0],"y":depart[1],"score":0} 
 
 def display_map_and_char(m,d,p):   
     for i in range (len(m)): #Tu appelles ici "M" alors qu'il ne fait pas partie des arguments
@@ -38,7 +50,7 @@ def display_map_char_and_objects(m,d,p,t):
                 print(p["repr"],end="")
            elif (i,j) in t:
                   
-                  print('\U0001f56f',end="")
+                  print('i',end="")
            elif m[i][j] in d :
                   print(d[m[i][j]],end="")
 
@@ -78,8 +90,7 @@ def update_p(letter,p,m):
       else:
             print("ce n'est pas possible")
 
-#M = [[0, 0, 0, 1, 0, 0, 2],[0, 1, 0, 0, 0, 0, 0],[0, 1, 0, 0, 1, 0, 0],[0, 0, 1, 0, 0, 0, 2]]
-# Ne donne pas le même nom à tes variables que tu initialises et aux arguments de la fonction
+
 D={0:'_',1:'#',2:" "}
 dep=(0,0)
 
@@ -87,51 +98,70 @@ nb=2
 M = [[0, 0, 0, 1, 0, 0, 2],[0, 1, 0, 0, 1, 0, 0],[0, 1, 0, 0, 1, 0, 0],[0, 0, 1, 0, 1, 0, 2]]
 T=create_objects(nb,M)
 P=create_perso(dep)
-letter=""
+letter="z"
 answer=True
-while answer:
-    
-    display_map_char_and_objects(M,D,P,T)
-    if len(T)==0: 
-        print("La partie est terminée. \n SCORE: ",P["score"]) 
-        break 
-    else:
-        letter= input("Où souhaitez-vous aller ?")
-        if letter!="z" and letter!="q" and letter!="s" and letter!="d":
-            break
-        update_p(letter,P,M)
-        update_objects(P,T)
-        print("Votre score est de: ",P["score"]) 
 
-M1 = [[0, 0, 0, 1, 0, 0, 2],[0, 1, 0, 2, 0, 0, 0],[0, 2, 0, 0, 1, 0, 2],[0, 0, 1, 0, 0, 0, 2]]
+
+while answer and (letter=="z" or letter=="q" or letter=="s" or letter=="d"):
+        start_time_1 = datetime.datetime.now()
+        display_map_char_and_objects(M,D,P,T)
+        if len(T)==0:
+            end_time_1 = datetime.datetime.now()
+            time_diff_1 = (end_time_1 - start_time_1)
+            execution_time_1 = time_diff_1.total_seconds()*100
+            print("La partie est terminée. \n SCORE: ",P["score"], "\n Temps: ",execution_time_1,"s")
+            print("Bienvenue au niveau 2")
+            break
+        else:
+            letter= input("Où souhaitez-vous aller ?")
+            if letter!="z" and letter!="q" and letter!="s" and letter!="d":
+                break
+            update_p(letter,P,M)
+            update_objects(P,T)
+            print("Votre score est de: ",P["score"])
+            
+        
+M1 = [[0, 0, 0, 1, 0, 0, 2],[0, 1, 0, 2, 0, 1, 0],[1, 2, 0, 0, 1, 2, 0],[0, 0, 1, 0, 0, 0, 2]]
 Z=create_objects(6, M1)
 U=create_perso((0,0))
-print("Bienvenue dans le niveau 2")
-i=0
-while answer:
-    display_map_char_and_objects(M1,D,U,Z)
-    if len(Z)==0: 
-        print("La partie est terminée. \n SCORE: ",U["score"]) 
-        break 
-    else:
-        letter= input("Où souhaitez-vous aller ?")
-        if letter!="z" and letter!="q" and letter!="s" and letter!="d":
-            break
-        update_p(letter,U,M1)
-        update_objects(U,Z)
-        print("Votre score est de: ",U["score"]) 
-        i+=1
-M2 = [[0, 0, 2, 0, 0, 0, 2],[0, 1, 0, 2, 0, 2, 0],[0, 0, 2, 0, 1, 0, 2],[0, 0, 1, 2, 0, 0, 2]]
 
+
+while answer and (letter=="z" or letter=="q" or letter=="s" or letter=="d"):
+            display_map_char_and_objects(M1,D,U,Z)
+            start_time_2 = datetime.datetime.now()
+            if len(Z)==0:
+                end_time_2 = datetime.datetime.now()
+                time_diff_2 = (end_time_2 - start_time_2)
+                execution_time_2 = time_diff_2.total_seconds()*100
+                print("La partie est terminée. \n SCORE: ",U["score"], "\n Temps: ",execution_time_2,"s")
+                print("Bienvenue au niveau 3")  
+                break
+            else:
+                letter= input("Où souhaitez-vous aller ?")
+                if letter!="z" and letter!="q" and letter!="s" and letter!="d":
+                    break
+                update_p(letter,U,M1)
+                update_objects(U,Z)
+                print("Votre score est de: ",U["score"]) 
+            
+
+
+               
+M2 = [[0, 0, 2, 0, 0, 0, 2],[0, 1, 0, 2, 1, 2, 0],[0, 0, 2, 0, 1, 0, 2],[1, 0, 1, 2, 1, 0, 2]]
 Q=create_objects(8, M2)
 R=create_perso((0,0))
-print("Bienvenue dans le niveau 3")
-i=0
-while answer:
+
+while answer and (letter=="z" or letter=="q" or letter=="s" or letter=="d"):
     display_map_char_and_objects(M2,D,R,Q)
+    start_time_3 = datetime.datetime.now()
     if len(Q)==0: 
-        print("La partie est terminée. \n SCORE: ",R["score"]) 
-        break 
+        end_time_3 = datetime.datetime.now()
+        time_diff_3 = (end_time_3 - start_time_3)
+        execution_time_3 = time_diff_3.total_seconds()*100
+        print("La partie est terminée. \n SCORE: ",R["score"], "\n Temps: ",execution_time_3,"s")
+        print("Vous avez terminé le jeu.\n FELICITATION !")
+        break
+                            
     else:
         letter= input("Où souhaitez-vous aller ?")
         if letter!="z" and letter!="q" and letter!="s" and letter!="d":
@@ -139,4 +169,4 @@ while answer:
         update_p(letter,R,M2)
         update_objects(R,Q)
         print("Votre score est de: ",R["score"]) 
-        i+=1
+                        
