@@ -20,17 +20,20 @@ def boutton():
     print("Bienvenue "+champNom.get()+" tu peux cliquer sur START pour commencer la partie")
     
 def StartButton():
-    import prototype
+    import projetpython
 
 ok=Button(windows,text="Valider",command=boutton)
 ok.place(x=365,y=315)
+def StartRegle():
+    import regles
 
 lblNom=Label(windows,text="Saisissez votre nom")
 champNom=Entry(windows)
 champNom.place(x=325,y=275) #le x va nous permettre de le decaler de gauche à droite (x grand ira vers la droite)
 lblNom.place(x=335,y=225) #plus le y est petit plus il sera proche du haut de page
 
-
+regle_du_jeu=Button(windows,text="Règles du jeu",width=15, heigh=1,font=("Courrier",10), bg="white", fg="black",command=StartRegle)
+regle_du_jeu.place(x=590,y=50)
 
 
 windows.mainloop()
